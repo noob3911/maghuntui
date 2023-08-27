@@ -6,3 +6,5 @@ export const navlinks = [
    {href: "#Stream",label: "Stream"},
    {href: "#Contact",label: "Contact"},
 ];
+
+export const url ="https://maghunt.cyclic.cloud/"
