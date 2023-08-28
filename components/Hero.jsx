@@ -34,7 +34,7 @@ const Hero = () => {
       <>
          <section className="flex items-center flex-col justify-center w-full bg-zinc-800 px-4 min-h-screen pb-44 ">
             <div className="flex items-center flex-col justify-center pt-24 ">
-               <h1 className="text-5xl font-palanquin text-white pb-10">Magnet Hunt</h1>
+               <h1 className="text-4xl font-palanquin text-white pb-10">Magnet Hunt</h1>
                <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center ">
                   <div className="relative ">
                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
