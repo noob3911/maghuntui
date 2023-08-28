@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { url } from "@/constants";
+import { url, localurl } from "@/constants";
 import TableLoader from "./Loader";
 import { ImMagnet } from "react-icons/im";
 import { IoMdCopy } from "react-icons/io";
@@ -15,23 +15,36 @@ const Hero = () => {
 
    const magnetRef = useRef(null);
 
-   const handleMagnetCopy = () => {
-      const magnetCopy = magnetRef.current.href;
+   // const handleMagnetCopy = () => {
+   //    const magnetCopy = magnetRef?.current?.href;
+
+   //    if (magnetCopy) {
+   //       const textarea = document.createElement("textarea");
+   //       textarea.value = magnetCopy;
+   //       document.body.appendChild(textarea);
+   //       textarea.select();
+
+   //       try {
+   //          document.execCommand("copy");
+   //          toast.success("Magnet Copied");
+   //       } catch (error) {
+   //          console.error("Failed to copy:", error);
+   //       }
+
+   //       document.body.removeChild(textarea);
+   //    }
+   // };
+
+   const handleMagnetCopy = async (link) => {
+      const magnetCopy = link
 
       if (magnetCopy) {
-         const textarea = document.createElement("textarea");
-         textarea.value = magnetCopy;
-         document.body.appendChild(textarea);
-         textarea.select();
-
          try {
-            document.execCommand("copy");
+            await navigator.clipboard.writeText(magnetCopy);
             toast.success("Magnet Copied");
          } catch (error) {
             console.error("Failed to copy:", error);
          }
-
-         document.body.removeChild(textarea);
       }
    };
 
@@ -103,13 +116,19 @@ const Hero = () => {
                                       <h2 className="text-sm font-semibold text-white mb-2">{torrent.Name}</h2>
                                    </div>
                                    <div className="px-5 flex items-center justify-between pb-2">
-                                      <p className="text-white text-sm ">Size: {torrent.Size}</p>
-                                      <a href={torrent.Magnet} ref={magnetRef} className="text-indigo-600 hover:underline text-sm mb block"></a>
-                                      <button onClick={handleMagnetCopy} className="flex items-center text-white justify-center gap-1 ">Magnet 
-                                      <ImMagnet  className="text-red-600 cursor-pointer "></ImMagnet></button>
+                                      <p className="text-white text-sm">Size: {torrent.Size}</p>
+                                      <div className="flex items-center text-white justify-center gap-1">
+                                         <button onClick={() => handleMagnetCopy(torrent.Magnet)} className="text-red-600 cursor-pointer">
+                                            <p className="text-indigo-600 hover:underline cursor-pointer text-sm mb block"></p>
+                                            <ImMagnet />
+                                         </button>
+                                      </div>
                                    </div>
+
                                    <div className="px-5 py-1 bg-zinc-700 flex items-center justify-between mb-2">
-                                      <p className="text-sm text-white">Seeds: <span className="text-green-500 font-bold">{torrent.Seeders}</span></p>
+                                      <p className="text-sm text-white">
+                                         Seeds: <span className="text-green-500 font-bold">{torrent.Seeders}</span>
+                                      </p>
                                       <p className="text-sm text-white">Leech: {torrent.Leechers}</p>
                                    </div>
                                 </div>

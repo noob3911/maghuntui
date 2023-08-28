@@ -8,3 +8,4 @@ export const navlinks = [
 ];
 
 export const url ="https://maghunt.cyclic.cloud/"
+export const localurl ="http://localhost:6000/"
