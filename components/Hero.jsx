@@ -14,7 +14,7 @@ const Hero = () => {
    const [isLoading, setLoading] = useState(false);
 
    const handleMagnetCopy = async (link) => {
-      const magnetCopy = link
+      const magnetCopy = link;
 
       if (magnetCopy) {
          try {
@@ -87,11 +87,16 @@ const Hero = () => {
                         {torData?.length
                            ? torData.map((torrent, index) => (
                                 <div
-                                   className="bg-zinc-700 font-montserrat shadow-lg rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-3"
+                                   className={`bg-zinc-700 font-montserrat shadow-lg rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/ lg:w-1/4 xl:w-1/5 ${
+                                      torData.length === 1 ? "sm:w-full md:w-full lg:w-full xl:w-full" : "m-3"
+                                   }`}
                                    key={index}
                                 >
                                    <div className="px-4 py-5">
-                                      <h2 className="text-sm font-semibold text-yellow-400 mb-2">#{index+1}<span className="px-2 text-white">{torrent.Name}</span></h2>
+                                      <h2 className="text-sm font-semibold text-yellow-400 mb-2">
+                                         #{index + 1}
+                                         <span className="px-2 text-white">{torrent.Name}</span>
+                                      </h2>
                                    </div>
                                    <div className="px-5 flex items-center justify-between pb-2">
                                       <p className="text-white text-sm">Size: {torrent.Size}</p>
