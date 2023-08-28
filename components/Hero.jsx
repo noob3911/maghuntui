@@ -67,14 +67,14 @@ const Hero = () => {
                      </div>
                      <input
                         type="text"
-                        className="rounded-full font-montserrat pl-12 pr-4 py-2 bg-transparent text-slate-600 border border-gray-300 focus:outline-none focus:border-blue-500 text-xl"
+                        className="rounded-full  font-montserrat pl-12 pr-4 py-2 bg-transparent text-slate-600 border border-gray-300 focus:outline-none focus:border-blue-500 text-xl"
                         placeholder="Search..."
                         onChange={handleSearch}
                      />
                   </div>
                   <button
                      type="submit"
-                     className="w-32 my-4 mt-10 text-white sm:w-36 flex items-center text-md justify-center text-center  h-9 rounded-full  hover:brightness-110 bg-opacity-0 shadow-sm  mt-4 bg-gradient-to-t from-indigo-900 via-indigo-900 to-indigo-800"
+                     className="w-32 my-4 mt-[2.1rem] text-white sm:w-36 flex items-center text-md justify-center text-center  h-9 rounded-full  hover:brightness-110 bg-opacity-0 shadow-sm  mt-4 bg-gradient-to-t from-indigo-900 via-indigo-900 to-indigo-800"
                   >
                      {isLoading ? "Loading.." : "Search"}
                   </button>
