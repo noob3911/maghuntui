@@ -32,7 +32,7 @@ const Hero = () => {
 
    return (
       <>
-         <section className="flex items-center flex-col justify-center w-full bg-zinc-800 px-4 min-h-screen pb-44 ">
+         <section className="flex items-center flex-col justify-center w-full bg-zinc-800  min-h-screen pb-44 ">
             <div className="flex items-center flex-col justify-center pt-24 ">
                <h1 className="text-4xl font-palanquin text-white pb-10">Magnet Hunt</h1>
                <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center ">
@@ -91,13 +91,13 @@ const Hero = () => {
                   <div className="text-center text-white text-sm py-4">Nothing Found</div>
                )
             ) : isLoading ? (
-               <>
-                  <div className="flex flex-wrap items-center justify-center pt-2 w-full ">
-                     {[1, 1, 1, 1, 1, 1,1,1].map((item) => (
+                  <div className="flex flex-wrap items-center justify-center ">
+                     {[1, 1, 1, 1, 1, 1,1,1].map((item, index) => (
+                        <div className="bg-zinc-700  rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-3" key={index}>
                         <TableLoader />
+                      </div>
                      ))}
                   </div>
-               </>
             ) : null}
          </section>
       </>
