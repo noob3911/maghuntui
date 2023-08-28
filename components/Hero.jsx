@@ -1,14 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { url } from "@/constants";
 import TableLoader from "./Loader";
-import {IoMagnetOutline} from 'react-icons/io'
+import { ImMagnet } from "react-icons/im";
+import { IoMdCopy } from "react-icons/io";
+import toast, { Toaster } from "react-hot-toast";
+// import {ReactTooltip} from "react-tooltip";
 
 const Hero = () => {
    const [torData, setTorData] = useState([]);
    const [search, setSearch] = useState("");
    const [searched, setSearched] = useState(false);
    const [isLoading, setLoading] = useState(false);
+
+   const magnetRef = useRef(null);
+
+   const handleMagnetCopy = () => {
+      const magnetCopy = magnetRef.current.href;
+
+      if (magnetCopy) {
+         const textarea = document.createElement("textarea");
+         textarea.value = magnetCopy;
+         document.body.appendChild(textarea);
+         textarea.select();
+
+         try {
+            document.execCommand("copy");
+            toast.success("Magnet Copied");
+         } catch (error) {
+            console.error("Failed to copy:", error);
+         }
+
+         document.body.removeChild(textarea);
+      }
+   };
 
    const handleSearch = (e) => {
       e.preventDefault();
@@ -64,41 +89,54 @@ const Hero = () => {
                   </button>
                </form>
             </div>
-            {searched && !isLoading && torData !== null ? (
-               torData.length > 0 ? (
-                  <div className="max-w-full flex flex-wrap justify-center ">
-                     {torData?.length
-                        ? torData.map((torrent) => (
-                             <div className="bg-zinc-700 shadow-lg rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-3">
-                                <div className="px-4 py-5">
-                                   <h2 className="text-sm font-semibold text-white mb-2">{torrent.Name}</h2>
-                                </div>
-                                   <div className="px-5 flex items-center justify-between">
-                                      <p className="text-white text-sm mb-2">Size: {torrent.Size}</p>
-                                      <a href={torrent.Magnet} className="text-indigo-600 hover:underline text-sm mb-2 block">
-                                         Magnet Link
-                                      </a>
+            <div className="max-w-full md:flex-wrap">
+               {searched && !isLoading && torData !== null ? (
+                  torData.length > 0 ? (
+                     <div className="max-w-full flex flex-wrap justify-center ">
+                        {torData?.length
+                           ? torData.map((torrent, index) => (
+                                <div
+                                   className="bg-zinc-700 font-montserrat shadow-lg rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-3"
+                                   key={index}
+                                >
+                                   <div className="px-4 py-5">
+                                      <h2 className="text-sm font-semibold text-white mb-2">{torrent.Name}</h2>
                                    </div>
-                                <div className="px-5 py-1 bg-zinc-700 flex items-center justify-between mb-2">
-                                   <p className="text-sm text-white">Seeds: {torrent.Seeders}</p>
-                                   <p className="text-sm text-white ">Leech: {torrent.Leechers}</p>
+                                   <div className="px-5 flex items-center justify-between pb-2">
+                                      <p className="text-white text-sm ">Size: {torrent.Size}</p>
+                                      <a href={torrent.Magnet} ref={magnetRef} className="text-indigo-600 hover:underline text-sm mb block"></a>
+                                      <button onClick={handleMagnetCopy} className="flex items-center text-white justify-center gap-1 ">Magnet 
+                                      <ImMagnet  className="text-red-600 cursor-pointer "></ImMagnet></button>
+                                   </div>
+                                   <div className="px-5 py-1 bg-zinc-700 flex items-center justify-between mb-2">
+                                      <p className="text-sm text-white">Seeds: <span className="text-green-500 font-bold">{torrent.Seeders}</span></p>
+                                      <p className="text-sm text-white">Leech: {torrent.Leechers}</p>
+                                   </div>
                                 </div>
-                             </div>
-                          ))
-                        : null}
-                  </div>
-               ) : (
-                  <div className="text-center text-white text-sm py-4">Nothing Found</div>
-               )
-            ) : isLoading ? (
+                             ))
+                           : null}
+                     </div>
+                  ) : (
+                     <div className="text-center text-white text-sm py-4">Nothing Found</div>
+                  )
+               ) : isLoading ? (
                   <div className="flex flex-wrap items-center justify-center ">
-                     {[1, 1, 1, 1, 1, 1,1,1].map((item, index) => (
-                        <div className="bg-zinc-700  rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-3" key={index}>
-                        <TableLoader />
-                      </div>
+                     {[1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
+                        <div className="bg-zinc-700 shadow-lg rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-3" key={index}>
+                           <TableLoader />
+                        </div>
                      ))}
                   </div>
-            ) : null}
+               ) : null}
+            </div>
+            <Toaster
+               containerStyle={{
+                  bottom: 90,
+               }}
+               position="bottom-center"
+               gutter={24}
+               reverseOrder={false}
+            />
          </section>
       </>
    );
