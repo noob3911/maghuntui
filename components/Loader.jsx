@@ -2,9 +2,9 @@ import React from "react";
 import ContentLoader from "react-content-loader";
 
 const TableLoader = (props) => (
-   <ContentLoader width={355} height={160} viewBox="0 0 355 160" backgroundColor="#ecebeb" foregroundColor="#ecebeb" {...props}>
+   <ContentLoader width={323} height={160} viewBox="0 0 355 160" backgroundColor="#3f3f3f" foregroundColor="#1f1f1f" {...props}>
       {/* Card */}
-      <rect x="0" y="0" rx="10" ry="10" width="355" height="160" />
+      <rect x="0" y="0" rx="10" ry="10" width="322" height="160" />
 
       <rect x="20" y="20" rx="5" ry="5" width="200" height="12" />
 
