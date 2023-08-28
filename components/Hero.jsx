@@ -13,28 +13,6 @@ const Hero = () => {
    const [searched, setSearched] = useState(false);
    const [isLoading, setLoading] = useState(false);
 
-   const magnetRef = useRef(null);
-
-   // const handleMagnetCopy = () => {
-   //    const magnetCopy = magnetRef?.current?.href;
-
-   //    if (magnetCopy) {
-   //       const textarea = document.createElement("textarea");
-   //       textarea.value = magnetCopy;
-   //       document.body.appendChild(textarea);
-   //       textarea.select();
-
-   //       try {
-   //          document.execCommand("copy");
-   //          toast.success("Magnet Copied");
-   //       } catch (error) {
-   //          console.error("Failed to copy:", error);
-   //       }
-
-   //       document.body.removeChild(textarea);
-   //    }
-   // };
-
    const handleMagnetCopy = async (link) => {
       const magnetCopy = link
 
@@ -96,7 +74,7 @@ const Hero = () => {
                   </div>
                   <button
                      type="submit"
-                     className="w-32 my-4 text-white sm:w-36 flex items-center text-xs justify-center text-center  h-9 rounded-full  hover:brightness-110 bg-opacity-0 shadow-sm  mt-4 bg-gradient-to-t from-indigo-900 via-indigo-900 to-indigo-800"
+                     className="w-32 my-4 mt-10 text-white sm:w-36 flex items-center text-md justify-center text-center  h-9 rounded-full  hover:brightness-110 bg-opacity-0 shadow-sm  mt-4 bg-gradient-to-t from-indigo-900 via-indigo-900 to-indigo-800"
                   >
                      {isLoading ? "Loading.." : "Search"}
                   </button>
@@ -113,14 +91,14 @@ const Hero = () => {
                                    key={index}
                                 >
                                    <div className="px-4 py-5">
-                                      <h2 className="text-sm font-semibold text-white mb-2">{torrent.Name}</h2>
+                                      <h2 className="text-sm font-semibold text-yellow-400 mb-2">#{index+1}<span className="px-2 text-white">{torrent.Name}</span></h2>
                                    </div>
                                    <div className="px-5 flex items-center justify-between pb-2">
                                       <p className="text-white text-sm">Size: {torrent.Size}</p>
                                       <div className="flex items-center text-white justify-center gap-1">
                                          <button onClick={() => handleMagnetCopy(torrent.Magnet)} className="text-red-600 cursor-pointer">
                                             <p className="text-indigo-600 hover:underline cursor-pointer text-sm mb block"></p>
-                                            <ImMagnet />
+                                            <ImMagnet size={24} />
                                          </button>
                                       </div>
                                    </div>

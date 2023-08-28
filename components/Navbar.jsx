@@ -7,7 +7,7 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { CgMagnet } from "react-icons/cg";
 const Navbar = () => {
    return (
-      <header className="padding-x py-4 fixed z-10 bg-blue-600 w-full">
+      <header className="padding-x py-2 fixed z-10 bg-blue-600 w-full">
          <nav className=" flex bg-blue-600 justify-between items-center max-container font-palanquin">
             <a href="/">
                <div className="flex items-center justify-end gap-[0.20rem]">
@@ -25,7 +25,7 @@ const Navbar = () => {
                ))}
             </ul>
             <div className="hidden max-lg:block">
-               <BiMenuAltRight className="" size={30} />
+               <BiMenuAltRight className="text-white" size={30} />
             </div>
          </nav>
       </header>

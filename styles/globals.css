@@ -21,7 +21,7 @@
   }
 
   .padding-x {
-    @apply sm:px-16 px-8;
+    @apply sm:px-16 px-2;
   }
 
   .padding-y {
