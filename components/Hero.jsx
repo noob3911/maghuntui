@@ -7,7 +7,7 @@ const Hero = () => {
    const [torData, setTorData] = useState([]);
    const [search, setSearch] = useState("");
    const [searched, setSearched] = useState(false);
-   const [isLoading, setLoading] = useState(false)
+   const [isLoading, setLoading] = useState(false);
 
    const handleSearch = (e) => {
       e.preventDefault();
@@ -16,16 +16,16 @@ const Hero = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      setLoading(true)
+      setLoading(true);
       try {
          const data = await axios.get(`${url}/api?search=${search}`);
          const response = await data.data;
          setTorData(response);
          setSearched(true);
       } catch (error) {
-         console.log(error)
-      }finally{
-         setLoading(false)
+         console.log(error);
+      } finally {
+         setLoading(false);
       }
    };
 
@@ -59,77 +59,105 @@ const Hero = () => {
                      type="submit"
                      className="w-32 my-4 text-white sm:w-36 flex items-center text-xs justify-center text-center  h-9 rounded-full  hover:brightness-110 bg-opacity-0 shadow-sm  mt-4 bg-gradient-to-t from-indigo-900 via-indigo-900 to-indigo-800"
                   >
-                     {isLoading ?"Loading..":"Search"}
+                     {isLoading ? "Loading.." : "Search"}
                   </button>
                </form>
             </div>
             {searched && !isLoading && torData !== null ? (
                torData.length > 0 ? (
-                  <div className="max-w-full overflow-x-auto">
-                     <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-slate-800 text-white">
-                           <tr>
-                              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                 Title
-                              </th>
-                              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                 Size
-                              </th>
-                              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                 Magnet Link
-                              </th>
-                              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                 Seeds
-                              </th>
-                              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                 Leech
-                              </th>
-                              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                 Upload Time
-                              </th>
-                           </tr>
-                        </thead>
-                        <tbody className="bg-slate-800 divide-y divide-gray-200">
-                           {torData?.length ? (
-                              torData.map((torrent, index) => (
-                                 <tr key={index}>
-                                    <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                                       <div className="text-xs text-white sm:text-sm">{torrent.Name}</div>
-                                    </td>
-                                    <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                                       <div className="text-xs text-white sm:text-sm">{torrent.Size}</div>
-                                    </td>
-                                    <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                                       <a href={torrent.Magnet} className="text-xs text-white hover:underline sm:text-sm">
-                                          Magnet Link
-                                       </a>
-                                    </td>
-                                    <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                                       <div className="text-xs text-white sm:text-sm">{torrent.Seeders}</div>
-                                    </td>
-                                    <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                                       <div className="text-xs text-white sm:text-sm">{torrent.Leechers}</div>
-                                    </td>
-                                    <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-xs text-white sm:text-sm">
-                                       {torrent.UploadedBy}
-                                    </td>
-                                 </tr>
-                              ))
-                           ) : (
-                              <tr>
-                                 <td colSpan="6" className="px-4 py-2 text-center text-xs font-medium text-white">
-                                    No data available.
-                                 </td>
-                              </tr>
-                           )}
-                        </tbody>
-                     </table>
+                  // <div className="max-w-full overflow-x-auto">
+                  //    <table className="min-w-full divide-y divide-gray-200">
+                  //       <thead className="bg-slate-800 text-white">
+                  //          <tr>
+                  //             <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  //                Title
+                  //             </th>
+                  //             <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  //                Size
+                  //             </th>
+                  //             <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  //                Magnet Link
+                  //             </th>
+                  //             <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  //                Seeds
+                  //             </th>
+                  //             <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  //                Leech
+                  //             </th>
+                  //             <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  //                Upload Time
+                  //             </th>
+                  //          </tr>
+                  //       </thead>
+                  //       <tbody className="bg-slate-800 divide-y divide-gray-200">
+                  //          {torData?.length ? (
+                  //             torData.map((torrent, index) => (
+                  //                <tr key={index}>
+                  //                   <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                  //                      <div className="text-xs text-white sm:text-sm">{torrent.Name}</div>
+                  //                   </td>
+                  //                   <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                  //                      <div className="text-xs text-white sm:text-sm">{torrent.Size}</div>
+                  //                   </td>
+                  //                   <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                  //                      <a href={torrent.Magnet} className="text-xs text-white hover:underline sm:text-sm">
+                  //                         Magnet Link
+                  //                      </a>
+                  //                   </td>
+                  //                   <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                  //                      <div className="text-xs text-white sm:text-sm">{torrent.Seeders}</div>
+                  //                   </td>
+                  //                   <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                  //                      <div className="text-xs text-white sm:text-sm">{torrent.Leechers}</div>
+                  //                   </td>
+                  //                   <td className="px-4 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-xs text-white sm:text-sm">
+                  //                      {torrent.UploadedBy}
+                  //                   </td>
+                  //                </tr>
+                  //             ))
+                  //          ) : (
+                  //             <tr>
+                  //                <td colSpan="6" className="px-4 py-2 text-center text-xs font-medium text-white">
+                  //                   No data available.
+                  //                </td>
+                  //             </tr>
+                  //          )}
+                  //       </tbody>
+                  //    </table>
+                  // </div>
+                  <div className="max-w-full flex flex-wrap justify-center">
+                     {torData?.length
+                        ? torData.map((torrent) => (
+                             <div className="bg-zinc-700 shadow-lg rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 m-2">
+                                <div className="px-6 py-4">
+                                   <h2 className="text-md font-semibold text-white mb-2">{torrent.Name}</h2>
+                                </div>
+                                   <div className="px-5 flex items-center justify-between">
+                                      <p className="text-white text-sm mb-2">Size: {torrent.Size}</p>
+                                      <a href={torrent.Magnet} className="text-indigo-600 hover:underline text-sm mb-2 block">
+                                         Magnet Link
+                                      </a>
+                                   </div>
+                                <div className="px-5 py-1 bg-zinc-700 flex items-center justify-between">
+                                   <p className="text-sm text-white">Seeds: {torrent.Seeders}</p>
+                                   <p className="text-sm text-white ">Leech: {torrent.Leechers}</p>
+                                </div>
+                             </div>
+                          ))
+                        : null}
                   </div>
                ) : (
                   <div className="text-center text-white text-sm py-4">Nothing Found</div>
                )
-            ) : isLoading ? <TableLoader/>:null}
-            
+            ) : isLoading ? (
+               <>
+                  <div className="flex flex-wrap items-center justify-center gap-5 w-full">
+                     {[1, 1, 1, 1, 1, 1].map((item) => (
+                        <TableLoader />
+                     ))}
+                  </div>
+               </>
+            ) : null}
          </section>
       </>
    );
