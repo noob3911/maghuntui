@@ -8,5 +8,5 @@ export const navlinks = [
 ];
 
 // export const url ="https://maghunt.cyclic.cloud/"
-export const url ="https://confused-teddy-yak.cyclic.app/"
+export const url ="https://confused-teddy-yak.cyclic.app"
 export const localurl ="http://localhost:6000/"
