@@ -35,7 +35,7 @@ const Hero = () => {
       e.preventDefault();
       setLoading(true);
       try {
-         const data = await axios.get(`${url}/api?search=${search}`);
+         const data = await axios.get(`${url}/magnet/api?search=${search}`);
          const response = await data.data;
          setTorData(response);
          setSearched(true);
